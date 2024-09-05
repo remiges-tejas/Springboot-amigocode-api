@@ -1,0 +1,24 @@
+version: '3.8'  # Adding version is a good practice to ensure compatibility
+
+services:
+  db:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: tejas
+      POSTGRES_PASSWORD: mailpass
+      PGDATA: /data/postgres
+    volumes:
+      - db:/data/postgres
+    ports:
+      - "5332:5432"  # Adjusted to map container port 5432 to host port 5332
+    networks:
+      - db
+    restart: unless-stopped
+
+networks:
+  db:
+    driver: bridge
+
+volumes:
+  db:
